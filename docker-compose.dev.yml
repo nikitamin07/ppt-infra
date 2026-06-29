@@ -15,19 +15,19 @@ services:
   # 2. Фронтенд (Next.js)
   frontend:
     build:
-      context: ../frontend
+      context: ../ppt-front
       dockerfile: Dockerfile.dev
     volumes:
-      - ../frontend:/app
+      - ../ppt-front:/app
       - /app/node_modules
 
   # 3. Бэкенд (PHP 8.2 + Apache)
   backend:
     build:
-      context: ../backend
+      context: ../ppt-back
       dockerfile: Dockerfile
     volumes:
-      - ../backend:/var/www/html
+      - ../ppt-back:/var/www/html
     # Передаем переменные из .env внутрь контейнера
     environment:
       - DB_HOST=${DB_HOST}
