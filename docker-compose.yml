@@ -15,13 +15,13 @@ services:
   # 2. Фронтенд (Next.js)
   frontend:
     build:
-      context: ../frontend
+      context: ../ppt-front
       dockerfile: Dockerfile
 
   # 3. Бэкенд (PHP 8.2 + Apache)
   backend:
     build:
-      context: ../backend
+      context: ../ppt-back
       dockerfile: Dockerfile
     # Передаем переменные из .env внутрь контейнера
     environment:
