@@ -18,25 +18,24 @@ services:
       context: ../ppt-front
       dockerfile: Dockerfile
 
-  # 3. Бэкенд (PHP 8.2 + Apache)
+  # 3. Бэкенд (Laravel + Filament)
   backend:
     build:
       context: ../ppt-back
       dockerfile: Dockerfile
     # Передаем переменные из .env внутрь контейнера
     environment:
-      - DB_HOST=${DB_HOST}
-      - DB_USER=${DB_USER}
-      - DB_PASS=${DB_PASS}
-      - DB_NAME=${DB_NAME}
-      - DB_BASE=${DB_BASE}
-      - DB_IS_HTTPS=${DB_IS_HTTPS}
-      - TELEGRAM_CHATS=${TELEGRAM_CHATS}
-      - TELEGRAM_API=${TELEGRAM_API}
-      - RECAPTCHA_SECRET=${RECAPTCHA_SECRET}
-      - RECAPTCHA_SITEKEY=${RECAPTCHA_SITEKEY}
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - APP_ENV=production
+      - APP_DEBUG=false
+      - APP_KEY=${APP_KEY}
+      - APP_URL=${APP_SCHEME}://${APP_DOMAIN}
+      - LOG_CHANNEL=stderr
+      - DB_CONNECTION=pgsql
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_DATABASE=${PG_DB}
+      - DB_USERNAME=${PG_USER}
+      - DB_PASSWORD=${PG_PASSWORD}
     depends_on:
       - postgres
 
