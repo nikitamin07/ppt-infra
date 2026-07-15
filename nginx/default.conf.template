@@ -2,8 +2,9 @@ server {
     listen 80;
     server_name ${APP_DOMAIN};
 
-    # 1. Все запросы, которые начинаются с /admin или /api, перенаправляем на PHP-бэкенд
-    location ~ ^/(admin|api) {
+    # 1. Всё, что обслуживает PHP-бэкенд: /admin и /api, плюс служебные пути Filament —
+    # /livewire (AJAX-запросы панели), его статика (js/css/fonts/filament) и /storage (загрузки админки)
+    location ~ ^/(admin|api|livewire|storage|js/filament|css/filament|fonts/filament) {
         # внутри нашего бэкенд-контейнера Apache на 80 порту
         proxy_pass http://backend:80; 
         
@@ -14,7 +15,7 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 
-    # 2. ВСЕ остальные запросы (главная страница, контакты, статика фронта) отдаем в Next.js
+    # 2. ВСЕ остальные запросы отдаем в Next.js
     location / {
         proxy_pass http://frontend:3000; 
         
