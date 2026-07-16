@@ -17,6 +17,13 @@ services:
     build:
       context: ../ppt-front
       dockerfile: Dockerfile
+    environment:
+      # Адрес API для серверного рендеринга: внутри контейнера localhost — это сам
+      # frontend, а относительный /api на сервере невозможен. В браузере он не нужен —
+      # там тот же origin, что и у сайта, и /api разруливает nginx.
+      - API_URL_INTERNAL=http://backend:80/api
+    depends_on:
+      - backend
 
   # 3. Бэкенд (Laravel + Filament)
   backend:
