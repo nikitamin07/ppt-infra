@@ -39,6 +39,9 @@ services:
       - APP_URL=${APP_SCHEME}://${APP_DOMAIN}
       # Origin'ы, которым браузер разрешит читать /api (см. ppt-back/config/cors.php)
       - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS}
+      # Уведомления о заявках с формы обратного звонка (см. ppt-back/app/Services/TelegramNotifier.php)
+      - TELEGRAM_API=${TELEGRAM_API}
+      - TELEGRAM_CHATS=${TELEGRAM_CHATS}
       - LOG_CHANNEL=stderr
       - DB_CONNECTION=pgsql
       - DB_HOST=postgres
