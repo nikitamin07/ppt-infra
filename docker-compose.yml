@@ -22,6 +22,8 @@ services:
       # frontend, а относительный /api на сервере невозможен. В браузере он не нужен —
       # там тот же origin, что и у сайта, и /api разруливает nginx.
       - API_URL_INTERNAL=http://backend:80/api
+      # Внешний адрес сайта: из него строятся canonical и og:url.
+      - SITE_URL=${APP_SCHEME}://${APP_DOMAIN}
     depends_on:
       - backend
 
